@@ -592,20 +592,42 @@ body {
         display: none; 
     }
 }
-<<<<<<< HEAD
-=======
-
-
+/* Mobil Menü Butonu (Masaüstünde Gizli) */
 .mobile-menu-btn {
     display: none; /* Masaüstünde gizli */
-    padding: 10px; /* Tıklama alanını genişletir */
+    padding: 10px; /* Tıklama alanını genişletir, mobilde basmayı kolaylaştırır */
     cursor: pointer;
-    z-index: 1002; /* Menünün de üstünde kalsın */
+    z-index: 1002; /* Menünün de (1000) üstünde kalsın */
     pointer-events: auto; /* Tıklanabilir olduğundan emin ol */
 }
 
-/* İkonun kendisi tıklamayı engellemesin */
+/* İkonun kendisi tıklamayı (click event) engellemesin, div algılasın */
 .mobile-menu-btn i {
     pointer-events: none;
 }
->>>>>>> 3c7c72f (mobil menu ve script guncellemesi)
+
+/* --- MOBİL TASARIM (768px Altı) --- */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block; /* Sadece mobilde görünür */
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Başta ekranın dışında saklı */
+        width: 70%; 
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98); /* Batman Dark Mode Siyahı */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease-in-out;
+        z-index: 1000;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    }
+
+    .nav-links.active {
+        right: 0; /* JS tetikleyince içeri girer */
+    }
+}
