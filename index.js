@@ -6,9 +6,14 @@ require('dotenv').config();
 const app = express();
 
 // CORS Ayarı: Frontend'den gelen isteklere izin verir
-app.use(cors());
-app.use(express.json());
+const cors = require('cors');
 
+// Bu kısım her yerden gelen isteğe izin verir (En garantisi)
+app.use(cors({
+    origin: '*', 
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
 // Mail Servis Ayarı
 const transporter = nodemailer.createTransport({
     service: 'gmail',

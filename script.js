@@ -210,12 +210,21 @@ window.addEventListener('scroll', () => {
     }
 
 });
+<<<<<<< HEAD
 
 // --- MOBİL MENÜ ENTEGRASYONU ---
+=======
+// Sayfa yüklendiğinde Lucide ikonlarını başlat
+if (window.lucide) {
+    lucide.createIcons();
+}
+
+>>>>>>> 3c7c72f (mobil menu ve script guncellemesi)
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const navLinks = document.getElementById('nav-links');
 
 if (mobileMenuBtn && navLinks) {
+<<<<<<< HEAD
     // Hamburger butonuna tıklayınca menüyü aç/kapat
     mobileMenuBtn.addEventListener('click', () => {
         // Menüyü kaydırarak açan class (active)
@@ -233,10 +242,27 @@ if (mobileMenuBtn && navLinks) {
                 icon.setAttribute('data-lucide', 'menu');
             }
             // Lucide ikonlarını yeniden oluştur ki değişiklik görünsün
+=======
+    mobileMenuBtn.addEventListener('click', (e) => {
+        // Sayfanın yenilenmesini veya garip davranmasını engelle
+        e.preventDefault();
+        
+        // Menüyü aç/kapat
+        navLinks.classList.toggle('active');
+        
+        // İkonu değiştir
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) {
+            const isOpened = navLinks.classList.contains('active');
+            icon.setAttribute('data-lucide', isOpened ? 'x' : 'menu');
+            
+            // Lucide'i zorla güncelle
+>>>>>>> 3c7c72f (mobil menu ve script guncellemesi)
             if (window.lucide) {
                 lucide.createIcons();
             }
         }
+<<<<<<< HEAD
     });
 
     // Menüdeki bir linke tıklandığında menüyü otomatik kapat
@@ -257,3 +283,21 @@ if (mobileMenuBtn && navLinks) {
         });
     });
 }
+=======
+        
+        console.log("Butona tıklandı, menü durumu:", navLinks.classList.contains('active'));
+    });
+
+    // Menü dışına veya linke tıklandığında kapat
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            }
+        });
+    });
+}
+>>>>>>> 3c7c72f (mobil menu ve script guncellemesi)

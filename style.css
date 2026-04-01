@@ -592,3 +592,20 @@ body {
         display: none; 
     }
 }
+<<<<<<< HEAD
+=======
+
+
+.mobile-menu-btn {
+    display: none; /* Masaüstünde gizli */
+    padding: 10px; /* Tıklama alanını genişletir */
+    cursor: pointer;
+    z-index: 1002; /* Menünün de üstünde kalsın */
+    pointer-events: auto; /* Tıklanabilir olduğundan emin ol */
+}
+
+/* İkonun kendisi tıklamayı engellemesin */
+.mobile-menu-btn i {
+    pointer-events: none;
+}
+>>>>>>> 3c7c72f (mobil menu ve script guncellemesi)
