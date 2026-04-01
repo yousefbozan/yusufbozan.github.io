@@ -210,3 +210,50 @@ window.addEventListener('scroll', () => {
     }
 
 });
+
+// --- MOBİL MENÜ ENTEGRASYONU ---
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const navLinks = document.getElementById('nav-links');
+
+if (mobileMenuBtn && navLinks) {
+    // Hamburger butonuna tıklayınca menüyü aç/kapat
+    mobileMenuBtn.addEventListener('click', () => {
+        // Menüyü kaydırarak açan class (active)
+        navLinks.classList.toggle('active');
+        
+        // Senin eski kodundaki 'toggle' animasyonu (CSS'de varsa çalışır)
+        mobileMenuBtn.classList.toggle('toggle');
+
+        // İkonun Menu'den X'e dönüşmesi (Lucide kullanıyorsan)
+        const icon = mobileMenuBtn.querySelector('i');
+        if (icon) {
+            if (navLinks.classList.contains('active')) {
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                icon.setAttribute('data-lucide', 'menu');
+            }
+            // Lucide ikonlarını yeniden oluştur ki değişiklik görünsün
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+    });
+
+    // Menüdeki bir linke tıklandığında menüyü otomatik kapat
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            // Menüyü kapat
+            navLinks.classList.remove('active');
+            
+            // İkonu tekrar 'menu' haline getir
+            mobileMenuBtn.classList.remove('toggle');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.setAttribute('data-lucide', 'menu');
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+            }
+        });
+    });
+}
