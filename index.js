@@ -28,22 +28,21 @@ const contactSchema = new mongoose.Schema({
 });
 const Contact = mongoose.model('Contact', contactSchema);
 
-// --- 4. Nodemailer (Gelişmiş Mail) Ayarı ---
-// Render üzerinde "Timeout" hatasını engellemek için Port 465 ve Secure ayarı kullanıldı.
+// --- 4. Nodemailer (Stabilizasyon Ayarı) ---
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
-    secure: true, // Port 465 kullandığımız için true
+    secure: true, 
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     },
     tls: {
-        rejectUnauthorized: false // Sertifika hatalarını önlemek için
+        rejectUnauthorized: false 
     }
 });
 
-// --- 5. Tek ve Güçlü API Endpoint ---
+// --- 5. API Endpoint ---
 app.post('/api/contact', async (req, res) => {
     const { name, email, message } = req.body;
 
@@ -61,29 +60,23 @@ app.post('/api/contact', async (req, res) => {
             text: `Gönderen: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`
         };
 
-        // Mail göndermeyi bekle
         await transporter.sendMail(mailOptions);
         console.log("📧 Mail kutuna uçtu!");
 
-        // C. Frontend'e Başarı Mesajı Gönder
         res.status(200).json({ success: true, message: "Mesajın her yere ulaştı bro!" });
 
     } catch (error) {
         console.error("❌ Hata oluştu:", error);
-        
-        // Önemli: Eğer DB'ye yazıldı ama mailde hata çıktıysa bile kullanıcıyı bilgilendiriyoruz
+        // Hata olsa bile DB'ye yazıldığını biliyoruz
         res.status(500).json({ 
             success: false, 
-            message: "Mesaj DB'ye kaydedildi ama mail gönderilirken bir sorun çıktı bro." 
+            message: "Hata: Mesaj kaydedildi ama mail iletilemedi bro." 
         });
     }
 });
 
-// --- 6. Sunucuyu Başlat ---
-// Render kendi portunu otomatik atar (genelde 10000)
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Batman Sunucusu ${PORT} portunda aktif!`);
 });
-
-// Batman v2.1: Final Deploy Check
+// Batman v2.1 Final Check - Bu satırı unutma!
