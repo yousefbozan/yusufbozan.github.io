@@ -28,12 +28,18 @@ const contactSchema = new mongoose.Schema({
 });
 const Contact = mongoose.model('Contact', contactSchema);
 
-// --- 4. Nodemailer (Mail) Ayarı ---
+// --- 4. Nodemailer (Gelişmiş Mail) Ayarı ---
+// Render üzerinde "Timeout" hatasını engellemek için Port 465 ve Secure ayarı kullanıldı.
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // Port 465 kullandığımız için true
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
+    },
+    tls: {
+        rejectUnauthorized: false // Sertifika hatalarını önlemek için
     }
 });
 
@@ -42,7 +48,7 @@ app.post('/api/contact', async (req, res) => {
     const { name, email, message } = req.body;
 
     try {
-        // A. Veritabanına Kaydet (Async/Await kullanarak jilet gibi)
+        // A. Veritabanına Kaydet
         const newContact = new Contact({ name, email, message });
         await newContact.save();
         console.log("💾 Veri DB'ye yazıldı.");
@@ -55,6 +61,7 @@ app.post('/api/contact', async (req, res) => {
             text: `Gönderen: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`
         };
 
+        // Mail göndermeyi bekle
         await transporter.sendMail(mailOptions);
         console.log("📧 Mail kutuna uçtu!");
 
@@ -63,11 +70,17 @@ app.post('/api/contact', async (req, res) => {
 
     } catch (error) {
         console.error("❌ Hata oluştu:", error);
-        res.status(500).json({ success: false, message: "Bir şeyler ters gitti bro." });
+        
+        // Önemli: Eğer DB'ye yazıldı ama mailde hata çıktıysa bile kullanıcıyı bilgilendiriyoruz
+        res.status(500).json({ 
+            success: false, 
+            message: "Mesaj DB'ye kaydedildi ama mail gönderilirken bir sorun çıktı bro." 
+        });
     }
 });
 
 // --- 6. Sunucuyu Başlat ---
+// Render kendi portunu otomatik atar (genelde 10000)
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Batman Sunucusu ${PORT} portunda aktif!`);
