@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // 3. CONTACT FORM (Node.js Backend Entegrasyonu)
+    // 3. CONTACT FORM (Render Backend Entegrasyonu)
     const contactForm = document.getElementById('contactForm');
     const successOverlay = document.getElementById('successOverlay');
 
@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                // Şimdilik Localhost üzerinden test ediyoruz
-                const API_URL = "http://localhost:5000/api/contact"; 
+                // RENDER ADRESİN: Senin verdiğin adresi tam olarak buraya entegre ettik.
+                const API_URL = "https://yousefbozan-github-io-1.onrender.com/api/contact"; 
 
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -77,36 +77,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const result = await response.json();
 
-                // Backend'den dönen response.ok ve result.success kontrolü
                 if (response.ok && result.success) {
                     // Başarı durumunda overlay'i göster
-                    successOverlay.style.display = 'flex'; 
-                    successOverlay.classList.remove('opacity-0', 'pointer-events-none');
-                    successOverlay.classList.add('opacity-100', 'pointer-events-auto');
-
+                    if (successOverlay) {
+                        successOverlay.style.display = 'flex'; 
+                        successOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                        successOverlay.classList.add('opacity-100', 'pointer-events-auto');
+                    }
                     contactForm.reset();
                 } else {
-                    alert('Hata: ' + (result.message || 'Mesaj kaydedilemedi bro, veritabanı hatası olabilir.'));
+                    alert('Hata: ' + (result.message || 'Mesaj kaydedilemedi bro, sunucu hatası.'));
                 }
 
             } catch (error) {
                 console.error('Bağlantı hatası:', error);
-                alert('Sunucuya bağlanılamadı bro! Terminalde index.js açık mı?');
+                alert('Batman Sunucusuna ulaşılamadı! Render uyku modunda olabilir, 30 saniye bekleyip tekrar dene bro.');
             } finally {
-                // Her durumda butonu eski haline getir
                 btnSpan.innerText = originalText;
                 submitBtn.disabled = false;
             }
         });
     }
-
 });
 
 // 4. Overlay kapatma
 function resetForm() {
     const successOverlay = document.getElementById('successOverlay');
     if (successOverlay) {
-        successOverlay.style.display = 'none'; // Direkt gizle
+        successOverlay.style.display = 'none';
         successOverlay.classList.add('opacity-0', 'pointer-events-none');
         successOverlay.classList.remove('opacity-100', 'pointer-events-auto');
     }
@@ -142,7 +140,7 @@ window.onload = () => {
     });
 };
 
-// 7. Navbar Scroll Effect & Mobile Menu
+// 7. Navbar Scroll Effect
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('.navbar');
     if (nav) {
@@ -153,26 +151,3 @@ window.addEventListener('scroll', () => {
         }
     }
 });
-
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const navLinks = document.getElementById('nav-links');
-
-if (mobileMenuBtn && navLinks) {
-    mobileMenuBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        navLinks.classList.toggle('active');
-        mobileMenuBtn.classList.toggle('active');
-        
-        const icon = mobileMenuBtn.querySelector('i');
-        if (icon && !mobileMenuBtn.classList.contains('active')) {
-             // İkon değişimi logic buraya gelebilir
-        }
-    });
-
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-        });
-    });
-}
