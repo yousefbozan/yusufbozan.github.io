@@ -18,24 +18,19 @@
             <li><a href="#about">Hakkımda</a></li>
             <li><a href="#projects">Projeler</a></li>
             <li><a href="#contact">İletişim</a></li>
-            </ul>
+        </ul>
 
         <div class="nav-actions">
             <a href="#contact" class="btn btn-sm btn-primary">Hadi Konuşalım</a>
         </div>
         
-<<<<<<< HEAD
         <div class="mobile-menu-btn" id="mobile-menu-btn">
-            <i data-lucide="menu"></i>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-=======
-       <div class="mobile-menu-btn" id="mobile-menu-btn">
-    <i data-lucide="menu"></i>
-</div>
->>>>>>> 3c7c72f (mobil menu ve script guncellemesi)
     </div>
 </nav>
-
     <div class="main-wrapper">
         <section class="hero-section">
             <div class="container">
@@ -248,53 +243,80 @@
             </div>
         </section>
 
-        <section id="contact" class="contact-section">
-            <div class="container">
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <span class="status-tag">Şu an yeni projelere açık</span>
-                        <h2 class="section-title">İletişim</h2>
-                        <p class="section-subtitle">Bir projeniz mi var? İş birliği yapmak mı istiyorsunuz?</p>
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <div class="item-icon"><i data-lucide="mail"></i></div>
-                                <div>
-                                    <h4>E-posta</h4>
-                                    <p>ybozan183@gmail.com</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-form-container">
-    <div id="successOverlay" class="success-card" style="display: none;">
-        <div class="success-icon"><i data-lucide="check-circle"></i></div>
-        <h3>Mesaj Gönderildi!</h3>
-        <p>En kısa sürede sana döneceğim bro.</p>
-        <button type="button" onclick="resetForm()" class="btn btn-outline">Yeni Mesaj</button>
+       <section id="contact" class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            
+            <div class="contact-info">
+                <span class="status-tag">Şu an yeni projelere açık</span>
+                <h2 class="section-title">İletişim</h2>
+                <p class="section-subtitle">Bir projeniz mi var? İş birliği yapmak mı istiyorsunuz?</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+    <div class="item-icon"><i data-lucide="mail"></i></div>
+    <div>
+        <h4>E-posta</h4>
+        <p><a href="mailto:ybozan183@gmail.com" class="contact-link">ybozan183@gmail.com</a></p>
     </div>
-<form id="contactForm" class="main-form">
-    <div class="input-group">
-        <label>İsim Soyisim *</label>
-        <input type="text" id="name" required>
-    </div>
-    <div class="input-group">
-        <label>Email Adresi *</label>
-        <input type="email" id="email" required>
-    </div>
-    <div class="input-group">
-        <label>Mesajınız *</label>
-        <textarea id="message" rows="5" required></textarea>
-    </div>
-    <button type="submit" id="submitButton" class="btn btn-primary submit-btn">
-        <span>Mesajı Gönder</span> <i data-lucide="send" size="18"></i>
-    </button>
-</form>
 </div>
                 </div>
-            </div>
-        </section>
-    </div>
 
+                <div class="contact-social-hub">
+                    <h3>Beni Takip Et</h3>
+                    <p>Kodlarımı incelemek veya profesyonel ağımıza katılmak için:</p>
+                    <div class="social-grid">
+                        <a href="https://github.com/yousefbozan" target="_blank" class="social-item">
+                            <i data-lucide="github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/yusuf-bozan-28442a272/" target="_blank" class="social-item">
+                            <i data-lucide="linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://www.instagram.com/yousefbozan2/" target="_blank" class="social-item">
+                            <i data-lucide="instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <div id="successOverlay" class="success-card" style="display: none;">
+                    <div class="success-icon"><i data-lucide="check-circle"></i></div>
+                    <h3>Mesaj Gönderildi!</h3>
+                    <p>En kısa sürede sana döneceğim bro.</p>
+                    <button type="button" onclick="resetForm()" class="btn btn-outline">Yeni Mesaj</button>
+                </div>
+
+                <form id="contactForm" class="main-form">
+                    <div class="input-group">
+                        <label>İsim Soyisim *</label>
+                        <input type="text" id="name" required placeholder="Adınızı giriniz ">
+                    </div>
+                    <div class="input-group">
+                        <label>Email Adresi *</label>
+                        <input type="email" id="email" required placeholder="Size nereden ulaşayım?">
+                    </div>
+                    <div class="input-group">
+                        <label>Mesajınız *</label>
+                        <textarea id="message" rows="5" required placeholder="Projenizi  anlatın  dinliyorum..."></textarea>
+                    </div>
+                    <button type="submit" id="submitButton" class="btn btn-primary submit-btn">
+                        <span>Mesajı Gönder</span> <i data-lucide="send" size="18"></i>
+                    </button>
+                </form>
+            </div>
+
+        </div> </div> </section>
+
+<div class="floating-social">
+    <a href="https://github.com/yousefbozan" target="_blank"><i data-lucide="github"></i></a>
+    <a href="#" target="_blank"><i data-lucide="linkedin"></i></a>
+    <a href="#" target="_blank"><i data-lucide="instagram"></i></a>
+    <div class="v-line"></div>
+</div>
     <div id="project-modal" class="modal-overlay" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModal()"><i data-lucide="x"></i></button>

@@ -210,41 +210,17 @@ window.addEventListener('scroll', () => {
     }
 
 });
-<<<<<<< HEAD
 
-// --- MOBİL MENÜ ENTEGRASYONU ---
-=======
 // Sayfa yüklendiğinde Lucide ikonlarını başlat
 if (window.lucide) {
     lucide.createIcons();
 }
 
->>>>>>> 3c7c72f (mobil menu ve script guncellemesi)
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const navLinks = document.getElementById('nav-links');
 
 if (mobileMenuBtn && navLinks) {
-<<<<<<< HEAD
-    // Hamburger butonuna tıklayınca menüyü aç/kapat
-    mobileMenuBtn.addEventListener('click', () => {
-        // Menüyü kaydırarak açan class (active)
-        navLinks.classList.toggle('active');
-        
-        // Senin eski kodundaki 'toggle' animasyonu (CSS'de varsa çalışır)
-        mobileMenuBtn.classList.toggle('toggle');
-
-        // İkonun Menu'den X'e dönüşmesi (Lucide kullanıyorsan)
-        const icon = mobileMenuBtn.querySelector('i');
-        if (icon) {
-            if (navLinks.classList.contains('active')) {
-                icon.setAttribute('data-lucide', 'x');
-            } else {
-                icon.setAttribute('data-lucide', 'menu');
-            }
-            // Lucide ikonlarını yeniden oluştur ki değişiklik görünsün
-=======
     mobileMenuBtn.addEventListener('click', (e) => {
-        // Sayfanın yenilenmesini veya garip davranmasını engelle
         e.preventDefault();
         
         // Menüyü aç/kapat
@@ -256,23 +232,18 @@ if (mobileMenuBtn && navLinks) {
             const isOpened = navLinks.classList.contains('active');
             icon.setAttribute('data-lucide', isOpened ? 'x' : 'menu');
             
-            // Lucide'i zorla güncelle
->>>>>>> 3c7c72f (mobil menu ve script guncellemesi)
             if (window.lucide) {
                 lucide.createIcons();
             }
         }
-<<<<<<< HEAD
+        
+        console.log("Butona tıklandı, menü durumu:", navLinks.classList.contains('active'));
     });
 
-    // Menüdeki bir linke tıklandığında menüyü otomatik kapat
+    // Menüdeki bir linke tıklandığında menüyü kapat
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
-            // Menüyü kapat
             navLinks.classList.remove('active');
-            
-            // İkonu tekrar 'menu' haline getir
-            mobileMenuBtn.classList.remove('toggle');
             const icon = mobileMenuBtn.querySelector('i');
             if (icon) {
                 icon.setAttribute('data-lucide', 'menu');
@@ -283,21 +254,3 @@ if (mobileMenuBtn && navLinks) {
         });
     });
 }
-=======
-        
-        console.log("Butona tıklandı, menü durumu:", navLinks.classList.contains('active'));
-    });
-
-    // Menü dışına veya linke tıklandığında kapat
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (icon) {
-                icon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-            }
-        });
-    });
-}
->>>>>>> 3c7c72f (mobil menu ve script guncellemesi)

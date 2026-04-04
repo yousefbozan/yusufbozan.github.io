@@ -592,31 +592,36 @@ body {
         display: none; 
     }
 }
-/* Mobil Menü Butonu (Masaüstünde Gizli) */
+/* --- MOBİL MENÜ BUTONU (Çizgiler) --- */
 .mobile-menu-btn {
     display: none; /* Masaüstünde gizli */
-    padding: 10px; /* Tıklama alanını genişletir, mobilde basmayı kolaylaştırır */
     cursor: pointer;
-    z-index: 1002; /* Menünün de (1000) üstünde kalsın */
-    pointer-events: auto; /* Tıklanabilir olduğundan emin ol */
+    z-index: 1002;
+    padding: 5px;
+    flex-direction: column;
+    gap: 6px; /* Çizgilerin arası */
 }
 
-/* İkonun kendisi tıklamayı (click event) engellemesin, div algılasın */
-.mobile-menu-btn i {
-    pointer-events: none;
+.mobile-menu-btn span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #fff; /* Çizgi rengi */
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out; /* Hareket hızı */
 }
 
 /* --- MOBİL TASARIM (768px Altı) --- */
 @media (max-width: 768px) {
     .mobile-menu-btn {
-        display: block; /* Sadece mobilde görünür */
+        display: flex; /* Sadece mobilde görünür */
     }
 
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%; /* Başta ekranın dışında saklı */
-        width: 70%; 
+        right: -100%; /* Başta ekranın dışında */
+        width: 70%;
         height: 100vh;
         background: rgba(10, 10, 10, 0.98); /* Batman Dark Mode Siyahı */
         flex-direction: column;
@@ -630,4 +635,132 @@ body {
     .nav-links.active {
         right: 0; /* JS tetikleyince içeri girer */
     }
+
+    .nav-actions {
+        display: none; /* Mobilde butonu saklıyoruz (üst bar kalabalık olmasın) */
+    }
+}
+
+/* --- X ANİMASYONU --- */
+/* Butona basıldığında (active class'ı varken) çizgilerin duruşu */
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0; /* Orta çizgi kaybolur */
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* İletişim Grid Yapısı */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Sol taraf biraz daha dar, form daha geniş */
+    gap: 4rem;
+    align-items: start;
+}
+
+/* Sosyal Hub Alanı */
+.contact-social-hub {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: 0.3s ease;
+    text-decoration: none;
+    color: #fff;
+}
+
+.social-item:hover {
+    background: rgba(255, 204, 0, 0.05);
+    border-color: #ffcc00;
+    transform: translateY(-5px);
+}
+
+.social-item i {
+    width: 20px;
+    height: 20px;
+}
+
+.social-item span {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Yüzen Bar */
+.floating-social {
+    position: fixed;
+    left: 40px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    z-index: 100;
+}
+
+.floating-social a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: 0.3s;
+}
+
+.floating-social a:hover {
+    color: #ffcc00;
+    transform: translateY(-3px);
+}
+
+.v-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .floating-social {
+        display: none; /* Mobilde yüzen barı gizle ki ekranı kapatmasın */
+    }
+}
+
+.contact-link {
+    color: inherit; /* Mevcut yazı rengini korur */
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-weight: 500;
+}
+
+.contact-link:hover {
+    color: #ffcc00; /* Bat-Signal Sarısı */
+    text-decoration: underline;
+}
+
+/* Sosyal itemlar içindeki ikonların boyutu bazen kaçabiliyor, sabitleyelim */
+.social-item i {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.5;
 }
